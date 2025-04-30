@@ -140,7 +140,7 @@ const TractorViewer = () => {
         </div>
         <div className="d-none d-md-inline-flex d-flex flex-row justify-content-center align-items-center gap-3">
           <div className="position-relative" onClick={() => setShowTooltip(!showTooltip)} onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
-            <img src={ibutton.src} alt="Info" style={{ width: "24px", height: "24px", cursor: "pointer" }} />
+            <img src="/images/ibutton.svg" alt="Info" style={{ width: "24px", height: "24px", cursor: "pointer" }} />
 
             {showTooltip && (
               <div className="custom-tooltip">
