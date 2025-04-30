@@ -55,14 +55,14 @@ const TractorViewer = () => {
     }
 
     // Check for mobile and AR device support only on the client-side
-    if (typeof window !== "undefined") {
-      const isMobile = /android|webos|blackberry|iemobile|opera mini/i.test(
-        navigator.userAgent
-      );
-      const isIPhone =
-        /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-      if (isMobile && !isIPhone) setShowArButton(true);
-    }
+    // if (typeof window !== "undefined") {
+    //   const isMobile = /android|webos|blackberry|iemobile|opera mini/i.test(
+    //     navigator.userAgent
+    //   );
+    //   const isIPhone =
+    //     /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    //   if (isMobile && !isIPhone) setShowArButton(true);
+    // }
   }, [tractorData]); // Depend on tractorData to only run when data is fetched or updated
 
   if (isLoading) return <Loading />;
