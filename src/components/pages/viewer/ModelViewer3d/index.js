@@ -7,8 +7,8 @@ import {
   onModelLoaded,
   useState,
 } from "react";
-import ibutton from "../../../../../public/images/ibutton.svg";
-import close from "../../../../../public/images/close.svg";
+// import ibutton from "../../../../../public/images/ibutton.svg";
+// import close from "../../../../../public/images/close.svg";
 
 const ModelViewer3d = forwardRef(
   ({ modelPath, activeColor, hotspotData, onModelLoaded }, ref) => {
@@ -129,7 +129,7 @@ const ModelViewer3d = forwardRef(
               data-visibility-attribute="hidden"
               onClick={() => hotspotClickHandler(hotspot)}
             >
-              <img src={ibutton.src}></img>
+              <img src="/images/ibutton.svg"></img>
               <span className="hotspot-label">{hotspot.hotspotLabel}</span>
             </button>
           ))}
@@ -146,7 +146,7 @@ const ModelViewer3d = forwardRef(
                   className="modal-close"
                   onClick={() => setActiveHotspot(null)}
                 >
-                  <img src={close.src}></img>
+                  <img src="/images/close.svg"></img>
                 </button>
               </div>
 
