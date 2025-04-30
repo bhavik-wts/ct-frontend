@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import { AwesomeCaptcha, captcha } from "react-awesome-captcha";
+import { AwesomeCaptcha, captcha } from "react-awesome-captcha";
 import { useForm } from "react-hook-form";
 
 import { Country, State, City } from "country-state-city";
@@ -469,11 +469,11 @@ const InquiryForm = () => {
                     </div>
                     <div className="col-sm-8 col-lg-4">
                       <div className="form-block">
-                        {/* <AwesomeCaptcha
+                        <AwesomeCaptcha
                           key={captchaKey}
                           onValidate={handleCaptchaValidation}
                           className="captcha-block"
-                        /> */}
+                        />
                       </div>
                     </div>
                     <hr className="mb-0" />
