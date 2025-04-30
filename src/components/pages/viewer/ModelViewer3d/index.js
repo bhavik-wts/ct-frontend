@@ -1,4 +1,5 @@
 "use client";
+
 import {
   useRef,
   useEffect,
@@ -16,6 +17,11 @@ const ModelViewer3d = forwardRef(
     const modelViewerRef = useRef(null);
     const [activeHotspot, setActiveHotspot] = useState(null);
 
+    useEffect(() => {
+      if (typeof window !== "undefined" && modelViewerRef.current) {
+        import("@google/model-viewer");
+      }
+    }, []);
     // Define all the available colors for all models here
     // const COLORS = {
     //   RED: "#ff0026", // RGBA for red

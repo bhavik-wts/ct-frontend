@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
+    "@google/model-viewer": "^4.1.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "country-state-city": "^3.2.1",
