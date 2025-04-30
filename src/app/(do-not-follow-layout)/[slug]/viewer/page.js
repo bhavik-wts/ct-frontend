@@ -95,26 +95,24 @@ const TractorViewer = () => {
             )}
           </div>
         </div>
-      // <div className="web-3d-image">
-      //   <ModelViewer3d
-      //     ref={modelViewerRef}
-      //     activeColor={activeColor}
-      //     hotspotData={HotspotDetail} // Pass HotspotDetail to ModelViewer3d
-      //     modelPath={modelPath}
-      //     onModelLoaded={() => {
-      //       console.log("Model loaded successfully");
-      //       setModelLoading(false);
-      //     }}
-      //   />
-      //   {modelLoading && (
-      //     <div className="loader-3d-model-viewer">
-      //       <Loading /> {/* Show loader while model is loading */}
-      //     </div>
-      //   )}
-      // </div>
-            <div className="web-3d-image">
-               <p>3D model goes here</p>
-            </div>
+      <div className="web-3d-image">
+        // <ModelViewer3d
+        //   ref={modelViewerRef}
+        //   activeColor={activeColor}
+        //   hotspotData={HotspotDetail} // Pass HotspotDetail to ModelViewer3d
+        //   modelPath={modelPath}
+        //   onModelLoaded={() => {
+        //     console.log("Model loaded successfully");
+        //     setModelLoading(false);
+        //   }}
+        // />
+        // {modelLoading && (
+        //   <div className="loader-3d-model-viewer">
+        //     <Loading /> {/* Show loader while model is loading */}
+        //   </div>
+        // )}
+      </div>
+            
       <div className="web-3d-option">
         <div className="colors">
           {colors?.data.map((color, index) => (
