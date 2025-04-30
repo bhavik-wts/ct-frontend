@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import { AwesomeCaptcha, captcha } from "react-awesome-captcha";
+import { AwesomeCaptcha, captcha } from "react-awesome-captcha";
 import { useForm } from "react-hook-form";
 
 import { Country, State, City } from "country-state-city";
@@ -11,7 +11,6 @@ import { GET_TRACTOR_LISTING_PAGE } from "@/graphql/queries/get-tractor-lising-p
 import { useSearchParams } from "next/navigation";
 
 import useNotification from "@/hooks/useNotification";
-const AwesomeCaptcha = dynamic(() => import('react-awesome-captcha'), { ssr: false });
 const InquiryForm = () => {
   const [activeTab, setActiveTab] = useState("Domestic");
   const [submitStatus, setSubmitStatus] = useState(null);
