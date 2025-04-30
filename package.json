@@ -1,0 +1,39 @@
+{
+  "name": "captain-tractor-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.11.8",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "country-state-city": "^3.2.1",
+    "html-react-parser": "^5.1.16",
+    "http-proxy-middleware": "^3.0.2",
+    "jquery": "^3.7.1",
+    "lottie-react": "^2.4.1",
+    "motion": "^11.13.1",
+    "next": "14.2.4",
+    "qs": "^6.12.1",
+    "react": "^18",
+    "react-awesome-captcha": "^1.2.3",
+    "react-bootstrap": "^2.10.4",
+    "react-dom": "^18",
+    "react-hook-form": "^7.53.0",
+    "react-owl-carousel": "^2.3.3",
+    "react-slick": "^0.30.2",
+    "react-toastify": "^11.0.2",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.1.14"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
+    "webpack": "^5.92.1"
+  }
+}

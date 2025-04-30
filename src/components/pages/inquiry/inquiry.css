@@ -1,0 +1,36 @@
+.captcha-block {
+  padding: 8px !important;
+}
+
+.captcha-block h1 {
+  font-size: 15px;
+}
+
+.captcha-block input:disabled {
+  border-radius: 0;
+  background-image: url("./captcha.jpg");
+}
+
+.captcha-block input {
+  border-radius: 32px;
+}
+
+.captcha-block a {
+  color: red;
+}
+
+.captcha-block .flex-col {
+  margin: 0 !important;
+  padding: 8px !important;
+}
+
+.captcha-block .text-primary {
+  padding: 6px;
+  width: fit-content;
+  color: red !important;
+  cursor: pointer;
+}
+
+.captcha-block input {
+  width: 100% !important;
+}
