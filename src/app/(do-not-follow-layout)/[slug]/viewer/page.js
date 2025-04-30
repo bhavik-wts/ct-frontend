@@ -49,10 +49,10 @@ const TractorViewer = () => {
     }
   };
 
-  useEffect(() => {
-    if (!tractorData) {
-      fetchTractorData();
-    }
+  // useEffect(() => {
+  //   if (!tractorData) {
+  //     fetchTractorData();
+  //   }
 
     // Check for mobile and AR device support only on the client-side
     // if (typeof window !== "undefined") {
@@ -63,7 +63,7 @@ const TractorViewer = () => {
     //     /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     //   if (isMobile && !isIPhone) setShowArButton(true);
     // }
-  }, [tractorData]); // Depend on tractorData to only run when data is fetched or updated
+  // }, [tractorData]); // Depend on tractorData to only run when data is fetched or updated
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error}</div>;
