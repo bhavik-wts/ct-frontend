@@ -1,5 +1,5 @@
-import DomesticDetails from "@/components/pages/contact-us/DomesticDetails";
-import InternationalDetails from "@/components/pages/contact-us/InternationalDetails";
+import DomesticDetails from "@/components/pages/ contact-us/DomesticDetails";
+import InternationalDetails from "@/components/pages/ contact-us/InternationalDetails";
 import Banner from "@/components/shared/Banner";
 import { GET_CONTACT_US_PAGE_DATA } from "@/graphql/queries/contact-us";
 import { fetchData } from "@/lib/graphql-operations";
