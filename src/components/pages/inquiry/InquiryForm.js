@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { AwesomeCaptcha, captcha } from "react-awesome-captcha";
+// import { AwesomeCaptcha, captcha } from "react-awesome-captcha";
 import { useForm } from "react-hook-form";
 
 import { Country, State, City } from "country-state-city";
