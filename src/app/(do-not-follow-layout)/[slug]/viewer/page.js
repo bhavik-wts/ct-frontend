@@ -96,6 +96,7 @@ const TractorViewer = () => {
           </div>
         </div>
       <div className="web-3d-image">
+            Hi
         // <ModelViewer3d
         //   ref={modelViewerRef}
         //   activeColor={activeColor}
