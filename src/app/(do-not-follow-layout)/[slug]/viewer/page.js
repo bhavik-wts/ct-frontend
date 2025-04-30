@@ -96,22 +96,21 @@ const TractorViewer = () => {
           </div>
         </div>
       <div className="web-3d-image">
-            Hi
-        // <ModelViewer3d
-        //   ref={modelViewerRef}
-        //   activeColor={activeColor}
-        //   hotspotData={HotspotDetail} // Pass HotspotDetail to ModelViewer3d
-        //   modelPath={modelPath}
-        //   onModelLoaded={() => {
-        //     console.log("Model loaded successfully");
-        //     setModelLoading(false);
-        //   }}
-        // />
-        // {modelLoading && (
-        //   <div className="loader-3d-model-viewer">
-        //     <Loading /> {/* Show loader while model is loading */}
-        //   </div>
-        // )}
+        <ModelViewer3d
+          ref={modelViewerRef}
+          activeColor={activeColor}
+          hotspotData={HotspotDetail} // Pass HotspotDetail to ModelViewer3d
+          modelPath={modelPath}
+          onModelLoaded={() => {
+            console.log("Model loaded successfully");
+            setModelLoading(false);
+          }}
+        />
+        {modelLoading && (
+          <div className="loader-3d-model-viewer">
+            <Loading /> {/* Show loader while model is loading */}
+          </div>
+        )}
       </div>
             
       <div className="web-3d-option">
