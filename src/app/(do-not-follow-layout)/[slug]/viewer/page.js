@@ -10,7 +10,7 @@ import { fetchData as graphqlFetchData } from "@/lib/graphql-operations";
 
 // Dynamically import the 3D viewer to disable SSR
 const ModelViewer3d = dynamic(() => import("@/components/pages/viewer/ModelViewer3d"), {
-  ssr: true,
+  ssr: false,
 });
 
 const TractorViewer = () => {
