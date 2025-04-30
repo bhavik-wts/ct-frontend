@@ -1,8 +1,11 @@
 "use client";
-export const dynamic = "force-dynamic";
 
 import { useRef, useState, useEffect } from "react";
-import ModelViewer3d from "@/components/pages/viewer/ModelViewer3d";
+import dynamic from "next/dynamic";
+// import ModelViewer3d from "@/components/pages/viewer/ModelViewer3d";
+const ModelViewer3d = dynamic(() => import("@/components/pages/viewer/ModelViewer3d"), {
+  ssr: false,
+});
 import { useParams, useRouter } from "next/navigation";
 import Loading from "./loading";
 import { getStrapiURL } from "@/lib/utils";
