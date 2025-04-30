@@ -8,7 +8,6 @@ import Loading from "./loading";
 import { getStrapiURL } from "@/lib/utils";
 import { GET_TRACTOR_BY_SLUG_VIEWER } from "@/graphql/queries/get-tractor-by-slug-viewer";
 import { fetchData as graphqlFetchData } from "@/lib/graphql-operations";
-import ibutton from "../../../../../public/images/ibutton.svg";
 
 const TractorViewer = () => {
   const { slug } = useParams();
@@ -81,7 +80,7 @@ const TractorViewer = () => {
         Exit
       </button>
           <div className="ibutton-s mob-ibutton" onClick={() => setShowTooltip(!showTooltip)} onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
-            <img src={ibutton.src} alt="Info" style={{ width: "24px", height: "24px", cursor: "pointer" }} />
+            <img src="/images/ibutton.svg" alt="Info" style={{ width: "24px", height: "24px", cursor: "pointer" }} />
 
             {showTooltip && (
               <div className="custom-tooltip">
