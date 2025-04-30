@@ -11,7 +11,7 @@ import { GET_TRACTOR_LISTING_PAGE } from "@/graphql/queries/get-tractor-lising-p
 import { useSearchParams } from "next/navigation";
 
 import useNotification from "@/hooks/useNotification";
-
+const AwesomeCaptcha = dynamic(() => import('react-awesome-captcha'), { ssr: false });
 const InquiryForm = () => {
   const [activeTab, setActiveTab] = useState("Domestic");
   const [submitStatus, setSubmitStatus] = useState(null);
