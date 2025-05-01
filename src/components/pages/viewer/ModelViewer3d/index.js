@@ -8,11 +8,22 @@ import {
   onModelLoaded,
   useState,
 } from "react";
-// import ibutton from "../../../../../public/images/ibutton.svg";
-// import close from "../../../../../public/images/close.svg";
+import ibutton from "../../../../../public/images/ibutton.svg";
+import close from "../../../../../public/images/close.svg";
 
 const ModelViewer3d = forwardRef(
   ({ modelPath, activeColor, hotspotData, onModelLoaded }, ref) => {
+    const viewerRef = useRef(null);
+    useEffect(() => {
+      // Safe DOM usage
+      if (typeof window !== 'undefined') {
+        // Load <model-viewer> script if needed
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js';
+        script.type = 'module';
+        document.head.appendChild(script);
+      }
+    }, []);
     // console.log("activecolor", activeColor);
     const modelViewerRef = useRef(null);
     const [activeHotspot, setActiveHotspot] = useState(null);
@@ -95,7 +106,8 @@ const ModelViewer3d = forwardRef(
     return (
       <div className="model-viewer-wrapper">
         <model-viewer
-          ref={modelViewerRef}
+          // ref={modelViewerRef}
+          ref={ref || viewerRef}
           src={modelPath || "/models/200DI 2WD.glb"}
           // src={modelPath || "/models/tractor_Variant.glb"}
           ar
@@ -135,7 +147,7 @@ const ModelViewer3d = forwardRef(
               data-visibility-attribute="hidden"
               onClick={() => hotspotClickHandler(hotspot)}
             >
-              <img src="/images/ibutton.svg"></img>
+              <img src={ibutton.src}></img>
               <span className="hotspot-label">{hotspot.hotspotLabel}</span>
             </button>
           ))}
@@ -152,7 +164,7 @@ const ModelViewer3d = forwardRef(
                   className="modal-close"
                   onClick={() => setActiveHotspot(null)}
                 >
-                  <img src="/images/close.svg"></img>
+                  <img src={close.src}></img>
                 </button>
               </div>
 

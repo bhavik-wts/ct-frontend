@@ -1,42 +1,41 @@
 "use client";
+export const dynamic = "force-dynamic";
 
 import { useRef, useState, useEffect } from "react";
-import dynamic from "next/dynamic";
+import ModelViewer3d from "@/components/pages/viewer/ModelViewer3d";
 import { useParams, useRouter } from "next/navigation";
 import Loading from "./loading";
 import { getStrapiURL } from "@/lib/utils";
 import { GET_TRACTOR_BY_SLUG_VIEWER } from "@/graphql/queries/get-tractor-by-slug-viewer";
 import { fetchData as graphqlFetchData } from "@/lib/graphql-operations";
-
-// Dynamically import the 3D viewer to disable SSR
-const ModelViewer3d = dynamic(() => import("@/components/pages/viewer/ModelViewer3d"), {
-  ssr: false,
-});
+import ibutton from "../../../../../public/images/ibutton.svg";
 
 const TractorViewer = () => {
   const { slug } = useParams();
-  const router = useRouter();
-  const modelViewerRef = useRef(null);
-  const baseUrl = getStrapiURL();
-
   const [tractorData, setTractorData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [modelLoading, setModelLoading] = useState(true);
   const [showTooltip, setShowTooltip] = useState(false);
+
+
   const [error, setError] = useState(null);
   const [showArButton, setShowArButton] = useState(false);
-  const [activeColor, setActiveColor] = useState(null);
+  const [activeColor, setActiveColor] = useState(null); // Track active color
+  const modelViewerRef = useRef(null);
+  const router = useRouter();
+  const baseUrl = getStrapiURL();
 
   // Fetch tractor data using GraphQL
   const fetchTractorData = async () => {
     try {
-      const response = await graphqlFetchData(GET_TRACTOR_BY_SLUG_VIEWER, { slug });
+      const response = await graphqlFetchData(GET_TRACTOR_BY_SLUG_VIEWER, {
+        slug,
+      });
       const tractor = response.tractors.data;
+      // console.log("new hotspot data", tractor);
       if (!tractor || tractor.length === 0)
         throw new Error("No tractor found for the given slug");
-
       setTractorData(tractor[0]);
-
       setActiveColor({
         name: tractor[0]?.attributes?.colors?.data[0]?.attributes?.colorName,
         code: tractor[0]?.attributes?.colors?.data[0]?.attributes?.colorCode,
@@ -48,75 +47,69 @@ const TractorViewer = () => {
     }
   };
 
-  // Run on client only
   useEffect(() => {
     if (!tractorData) {
       fetchTractorData();
     }
 
+    // Check for mobile and AR device support only on the client-side
     if (typeof window !== "undefined") {
-      const isMobile = /android|webos|blackberry|iemobile|opera mini/i.test(navigator.userAgent);
-      const isIPhone = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-      if (isMobile && !isIPhone) {
-        setShowArButton(true);
-      }
+      const isMobile = /android|webos|blackberry|iemobile|opera mini/i.test(
+        navigator.userAgent
+      );
+      const isIPhone =
+        /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      if (isMobile && !isIPhone) setShowArButton(true);
     }
-  }, [tractorData]);
+  }, [tractorData]); // Depend on tractorData to only run when data is fetched or updated
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error}</div>;
 
-  const { GLBfile, colors, name, tractor_category, HotspotDetail } = tractorData.attributes || {};
+  const { GLBfile, colors, name, tractor_category, HotspotDetail } =
+    tractorData.attributes || {};
   const modelPath = baseUrl + GLBfile?.data?.attributes?.url;
 
   return (
     <section className="web-3d">
-      {/* Mobile Buttons */}
+      
       <div className="d-flex flex-row justify-content-center align-items-center gap-3 d-md-none">
-        <button className="exit-btn d-block mob-exit-btn" onClick={() => router.back()}>
-          Exit
-        </button>
-        <div
-          className="ibutton-s mob-ibutton"
-          onClick={() => setShowTooltip(!showTooltip)}
-          onMouseEnter={() => setShowTooltip(true)}
-          onMouseLeave={() => setShowTooltip(false)}
-        >
-          <img src="/images/ibutton.svg" alt="Info" style={{ width: 24, height: 24, cursor: "pointer" }} />
-          {showTooltip && (
-            <div className="custom-tooltip">
-              <div className="tooltip-arrow" />
-              <div className="tooltip-content">
-                This is your big tooltip or callout with any info you want to show!
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+      <button
+        className="exit-btn d-block mob-exit-btn"
+        onClick={() => router.back()}
+      >
+        Exit
+      </button>
+          <div className="ibutton-s mob-ibutton" onClick={() => setShowTooltip(!showTooltip)} onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
+            <img src={ibutton.src} alt="Info" style={{ width: "24px", height: "24px", cursor: "pointer" }} />
 
-      {/* 3D Viewer */}
+            {showTooltip && (
+              <div className="custom-tooltip">
+                <div className="tooltip-arrow" />
+                <div className="tooltip-content">
+                  This is your big tooltip or callout with any info you want to show!
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       <div className="web-3d-image">
         <ModelViewer3d
           ref={modelViewerRef}
           activeColor={activeColor}
-          hotspotData={HotspotDetail}
+          hotspotData={HotspotDetail} // Pass HotspotDetail to ModelViewer3d
           modelPath={modelPath}
           onModelLoaded={() => {
-            if (typeof window !== "undefined") {
-              console.log("Model loaded successfully");
-              setModelLoading(false);
-            }
+            console.log("Model loaded successfully");
+            setModelLoading(false);
           }}
         />
         {modelLoading && (
           <div className="loader-3d-model-viewer">
-            <Loading />
+            <Loading /> {/* Show loader while model is loading */}
           </div>
         )}
-      </div> 
-
-      {/* Options Panel */}
+      </div>
       <div className="web-3d-option">
         <div className="colors">
           {colors?.data.map((color, index) => (
@@ -129,11 +122,10 @@ const TractorViewer = () => {
                   name: color.attributes.colorName,
                   code: color.attributes.colorCode,
                 })
-              }
+              } // Update activeColor on click
             />
           ))}
         </div>
-
         <div className="modal-name">
           <ul>
             <li>
@@ -144,16 +136,10 @@ const TractorViewer = () => {
             </li>
           </ul>
         </div>
-
-        {/* Desktop Tooltip and Exit */}
         <div className="d-none d-md-inline-flex d-flex flex-row justify-content-center align-items-center gap-3">
-          <div
-            className="position-relative"
-            onClick={() => setShowTooltip(!showTooltip)}
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={() => setShowTooltip(false)}
-          >
-            <img src="/images/ibutton.svg" alt="Info" style={{ width: 24, height: 24, cursor: "pointer" }} />
+          <div className="position-relative" onClick={() => setShowTooltip(!showTooltip)} onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
+            <img src={ibutton.src} alt="Info" style={{ width: "24px", height: "24px", cursor: "pointer" }} />
+
             {showTooltip && (
               <div className="custom-tooltip">
                 <div className="tooltip-arrow" />
@@ -163,16 +149,26 @@ const TractorViewer = () => {
               </div>
             )}
           </div>
-
-          <button className="exit-btn d-none d-md-inline-flex" onClick={() => router.back()}>
+          <button
+            className="exit-btn d-none d-md-inline-flex"
+            onClick={() => router.back()}
+          >
             Exit
           </button>
         </div>
+        {/* <div>
+          <img src={ibutton.src}></img>
+        </div>
+        <button
+          className="exit-btn d-none d-md-inline-flex"
+          onClick={() => router.back()}
+        >
+          Exit
+        </button> */}
       </div>
-
       {showArButton && (
         <div className="ar-btn">
-          <button onClick={() => modelViewerRef.current?.enterAR()}>
+          <button onClick={() => modelViewerRef.current.enterAR()}>
             AR View
           </button>
         </div>
