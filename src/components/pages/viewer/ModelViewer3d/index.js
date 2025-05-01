@@ -15,6 +15,10 @@ const ModelViewer3d = forwardRef(
   ({ modelPath, activeColor, hotspotData, onModelLoaded }, ref) => {
     const viewerRef = useRef(null);
     useEffect(() => {
+      const script = document.createElement("script");
+      document.body.appendChild(script);
+    }, []);
+    useEffect(() => {
       // Safe DOM usage
       if (typeof window !== 'undefined') {
         // Load <model-viewer> script if needed

@@ -1,8 +1,8 @@
 "use client";
-export const dynamic = "force-dynamic";
-
+// export const dynamic = "force-dynamic";
+import dynamic from 'next/dynamic';
 import { useRef, useState, useEffect } from "react";
-import ModelViewer3d from "@/components/pages/viewer/ModelViewer3d";
+// import ModelViewer3d from "@/components/pages/viewer/ModelViewer3d";
 import { useParams, useRouter } from "next/navigation";
 import Loading from "./loading";
 import { getStrapiURL } from "@/lib/utils";
@@ -11,6 +11,9 @@ import { fetchData as graphqlFetchData } from "@/lib/graphql-operations";
 import ibutton from "../../../../../public/images/ibutton.svg";
 
 const TractorViewer = () => {
+  const ModelViewer3d = dynamic(() => import('@/components/pages/viewer/ModelViewer3d'), {
+    ssr: false,
+  });
   const { slug } = useParams();
   const [tractorData, setTractorData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
